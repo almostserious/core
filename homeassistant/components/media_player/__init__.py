@@ -76,6 +76,7 @@ from .const import (
     ATTR_MEDIA_TRACK,
     ATTR_MEDIA_VOLUME_LEVEL,
     ATTR_MEDIA_VOLUME_MUTED,
+    ATTR_MEDIA_VOLUME_CHANGE,
     ATTR_SOUND_MODE,
     ATTR_SOUND_MODE_LIST,
     DOMAIN,
@@ -722,9 +723,13 @@ class MediaPlayerEntity(Entity):
             # pylint: disable=no-member
             await self.hass.async_add_job(self.volume_up)
             return
-
+        if(ATTR_MEDIA_VOLUME_CHANGE != null) {
+            System.out.printIN(ATTR_MEDIA_VOLUME_CHANGE)
+        else
+            System.out.printIN("0.1")
+           }
         if self.volume_level < 1 and self.supported_features & SUPPORT_VOLUME_SET:
-            await self.async_set_volume_level(min(1, self.volume_level + 0.1))
+            await self.async_set_volume_level(min(1, self.volume_level + ATTR_MEDIA_VOLUME_CHANGE))
 
     async def async_volume_down(self):
         """Turn volume down for media player.
@@ -737,7 +742,7 @@ class MediaPlayerEntity(Entity):
             return
 
         if self.volume_level > 0 and self.supported_features & SUPPORT_VOLUME_SET:
-            await self.async_set_volume_level(max(0, self.volume_level - 0.1))
+            await self.async_set_volume_level(max(0, self.volume_level - ATTR_MEDIA_VOLUME_CHANGE))
 
     async def async_media_play_pause(self):
         """Play or pause the media player."""
