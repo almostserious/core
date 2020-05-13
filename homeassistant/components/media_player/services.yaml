@@ -27,6 +27,9 @@ volume_up:
     entity_id:
       description: Name(s) of entities to turn volume up on.
       example: "media_player.living_room_sonos"
+    step_level:
+      description: Step level to set as float.
+      example: 0.1
 
 volume_down:
   description: Turn a media player volume down.
@@ -34,6 +37,9 @@ volume_down:
     entity_id:
       description: Name(s) of entities to turn volume down on.
       example: "media_player.living_room_sonos"
+    step_level:
+      description: Step level to set as float.
+      example: 0.1
 
 volume_mute:
   description: Mute a media player's volume.
