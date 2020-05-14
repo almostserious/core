@@ -715,6 +715,10 @@ class MediaPlayerEntity(Entity):
             await self.async_turn_off()
 
     async def async_volume_up(self):
+        
+        """ Const ATTR_MEDIA_VOLUME_CHANGE can't be changed, use new Variable """
+        self.media_volume_change = ATTR_MEDIA_VOLUME_CHANGE
+ 
         """Turn volume up for media player.
 
         This method is a coroutine.
@@ -723,15 +727,19 @@ class MediaPlayerEntity(Entity):
             # pylint: disable=no-member
             await self.hass.async_add_job(self.volume_up)
             return
-        if(ATTR_MEDIA_VOLUME_CHANGE != null) {
-            System.out.printIN(ATTR_MEDIA_VOLUME_CHANGE)
-        else
-            System.out.printIN("0.1")
-           }
+        
+        """ If const ATTR_MEDIA_VOLUME_CHANGE not set use default 0.1 """
+        if self.media_volume_change == null: 
+            self.media_volume_change = 0.1
+       
         if self.volume_level < 1 and self.supported_features & SUPPORT_VOLUME_SET:
-            await self.async_set_volume_level(min(1, self.volume_level + ATTR_MEDIA_VOLUME_CHANGE))
+            await self.async_set_volume_level(min(1, self.volume_level + self.media_volume_change))
 
     async def async_volume_down(self):
+        
+        """ Const ATTR_MEDIA_VOLUME_CHANGE can't be changed, use new Variable """
+        self.media_volume_change = ATTR_MEDIA_VOLUME_CHANGE
+        
         """Turn volume down for media player.
 
         This method is a coroutine.
@@ -740,9 +748,13 @@ class MediaPlayerEntity(Entity):
             # pylint: disable=no-member
             await self.hass.async_add_job(self.volume_down)
             return
-
+        
+        """ If const ATTR_MEDIA_VOLUME_CHANGE not set use default 0.1 """
+        if self.media_volume_change == null: 
+            self.media_volume_change = 0.1
+            
         if self.volume_level > 0 and self.supported_features & SUPPORT_VOLUME_SET:
-            await self.async_set_volume_level(max(0, self.volume_level - ATTR_MEDIA_VOLUME_CHANGE))
+            await self.async_set_volume_level(max(0, self.volume_level - self.media_volume_change))
 
     async def async_media_play_pause(self):
         """Play or pause the media player."""
